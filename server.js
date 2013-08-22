@@ -22,6 +22,7 @@ app.all('/', function(req, res, next) {
 });
 
 app.get('/', task.serveIndexHtml);
+app.get('/web2lead', task.serveWeb2LeadHtml);
 app.get('/tasks', task.findAll);
 app.get('/tasks/:id', task.findById);
 app.post('/tasks', task.addObject);

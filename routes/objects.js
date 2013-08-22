@@ -30,6 +30,9 @@ db.open(function(err, db) {
 exports.serveIndexHtml = function(req, res){
     res.sendfile('public/index.html');
 };
+exports.serveWeb2LeadHtml = function(req, res){
+    res.sendfile('public/web2lead.html');
+};
 
 exports.findById = function(req, res) {
     var id = req.params.id;

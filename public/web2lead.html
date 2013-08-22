@@ -1,0 +1,30 @@
+<form name="webToLeadForm" action="http://google.com.ua" onSubmit="sendWebToLeadDataRequest()">
+
+    <!-- скрытые поля формы, содержащие служебную информацию о форме -->
+
+    <input type=hidden id="FormId" value="cdcbe45a-183a-4a11-a11d-5dc202662d3e"/>
+
+    <input type=hidden id="RequestURL" value="http://localhost:3000/"/>
+
+    <!-- поля формы, которые создал пользователь в дизайнере формы -->
+
+    <label for="Notes">Заметки</label>
+
+    <input id="Notes" maxlength="250" size="40" type="text"/><br>
+
+    <label for="Account">Контрагент</label>
+
+    <input id="Account" maxlength="250" size="40" type="text"/><br>
+
+
+    <input type="submit" id="submit" value="Отправить">
+
+</form>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script type="text/javascript">
+
+    var bpmjQueryNamespace = {};bpmjQueryNamespace.query = jQuery.noConflict(true);function getWebToLeadData() {	var webToLeadForm = null;	var result = {};	for (var i = 0; i < this.document.forms.length; i++) {		var form = this.document.forms[i];		if (form.name === "webToLeadForm") {			webToLeadForm = form;			break;		}	}	if (!webToLeadForm) {		return null;	}	result.formFieldsData = [];	for (var i = 0; i < webToLeadForm.length; i++) {		var element = webToLeadForm[i];		if (element.id === "FormId") {			result.formId = element.value;			continue;		}		if (element.id === "RequestURL") {			result.requestURL = element.value;			continue;		}		if ((element.type === "hidden") || (element.type === "submit")) {			continue;		}		if (element.constructor != HTMLInputElement) {			continue;		}		result.formFieldsData.push({			name: element.id,			value: element.value		});	}	return result;}function sendWebToLeadDataRequest() {		var data = getWebToLeadData();		if (!data) {			return;		}		bpmjQueryNamespace.query.ajax({			url: "http://localhost/1/rest/GeneratedWebFormService/SaveWebFormLeadData",			data: data		});	}
+</script>
